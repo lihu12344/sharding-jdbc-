@@ -1,0 +1,28 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: master,slave
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db0?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+        username: root
+        password: 123456
+      slave:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db1?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+        username: root
+        password: 123456
+    masterslave:
+      name: master-slave
+      master-data-source-name: master
+      slave-data-source-names: slave
+    props:
+      sql:
+        show: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.example.demo.pojo
+  type-enums-package: com.example.demo.myenum
